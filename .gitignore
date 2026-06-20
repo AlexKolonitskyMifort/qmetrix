@@ -1,0 +1,11 @@
+# Root-anchored so these never shadow source dirs (e.g. src/coverage/ is real source).
+/node_modules/
+/dist/
+/coverage/
+*.tgz
+*.log
+.DS_Store
+.env
+.env.local
+.idea/
+.vscode/

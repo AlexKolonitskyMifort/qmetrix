@@ -1,0 +1,4 @@
+# The bin scripts ship with `#!/usr/bin/env node` shebangs — a CRLF line ending
+# breaks `env` on Linux/macOS consumers. Force LF for all text, normalize on commit.
+* text=auto eol=lf
+*.mjs text eol=lf

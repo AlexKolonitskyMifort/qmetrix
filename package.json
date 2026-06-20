@@ -1,0 +1,51 @@
+{
+  "name": "@mifort/qmetrix",
+  "version": "1.0.0",
+  "description": "QMetriX — build & quality tooling (coverage merge, quality dashboard, image budget, security scan, structural duplication audit, e2e server guard, codebase bundler). Operates on the consuming repo via its cwd.",
+  "type": "module",
+  "license": "MIT",
+  "author": "Alex Kolonitsky <alex.kolonitsky@gmail.com>",
+  "homepage": "https://github.com/AlexKolonitskyMifort/qmetrix#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlexKolonitskyMifort/qmetrix.git"
+  },
+  "bugs": {
+    "url": "https://github.com/AlexKolonitskyMifort/qmetrix/issues"
+  },
+  "keywords": [
+    "quality",
+    "coverage",
+    "dashboard",
+    "tooling",
+    "code-quality",
+    "ci"
+  ],
+  "bin": {
+    "qmetrix-audit-structure": "src/audit-structure.mjs",
+    "qmetrix-bundle-codebase": "src/bundle-codebase.mjs",
+    "qmetrix-check-images": "src/check-images.mjs",
+    "qmetrix-optimize-images": "src/optimize-images.mjs",
+    "qmetrix-quality-dashboard": "src/quality-dashboard.mjs",
+    "qmetrix-security-scan": "src/security-scan.mjs",
+    "qmetrix-e2e-server-guard": "src/e2e-server-guard.mjs",
+    "qmetrix-coverage-clean": "src/coverage/clean.mjs",
+    "qmetrix-coverage-report-suite": "src/coverage/report-suite.mjs",
+    "qmetrix-coverage-report-global": "src/coverage/report-global.mjs",
+    "qmetrix-coverage-next-start": "src/coverage/next-start-cov.mjs"
+  },
+  "files": [
+    "src"
+  ],
+  "dependencies": {
+    "jsinspect-plus": "^3.1.3",
+    "monocart-coverage-reports": "^2.12.12",
+    "sharp": "^0.35.0"
+  },
+  "engines": {
+    "node": "22.x"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

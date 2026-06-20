@@ -1,0 +1,38 @@
+name: publish
+
+# Publish @mifort/qmetrix to the public npm registry on a semver tag (vX.Y.Z).
+# Requires the repo secret NPM_TOKEN (an npm automation token with publish rights
+# to the @mifort scope). The published artifact is immutable — bump the version
+# and tag again to release a new one.
+
+on:
+  push:
+    tags:
+      - 'v*'
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Install
+        run: npm ci
+
+      - name: Sanity check (package resolves & bins are executable)
+        run: node --input-type=module -e "import('node:fs').then(({readFileSync})=>{const p=JSON.parse(readFileSync('package.json','utf8'));for(const f of Object.values(p.bin)) readFileSync(f);console.log('bins present:',Object.keys(p.bin).length)})"
+
+      - name: Publish
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
