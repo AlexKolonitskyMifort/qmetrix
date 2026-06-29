@@ -36,7 +36,7 @@ const targets = argv.filter((a) => !a.startsWith('--'));
 const paths = targets.length ? targets : ['src'];
 
 // Resolve jsinspect-plus relative to THIS package (hoist-proof): works whether the
-// dep hoists to the app root or nests under node_modules/@mifort/qmetrix/node_modules.
+// dep hoists to the app root or nests under node_modules/@mifort-solutions/qmetrix/node_modules.
 const BIN = path.join(
   path.dirname(createRequire(import.meta.url).resolve('jsinspect-plus/package.json')),
   'bin',

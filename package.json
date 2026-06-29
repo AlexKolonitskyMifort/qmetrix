@@ -1,5 +1,5 @@
 {
-  "name": "@mifort/qmetrix",
+  "name": "@mifort-solutions/qmetrix",
   "version": "1.0.0",
   "description": "QMetriX — build & quality tooling (coverage merge, quality dashboard, image budget, security scan, structural duplication audit, e2e server guard, codebase bundler). Operates on the consuming repo via its cwd.",
   "type": "module",

@@ -1,6 +1,6 @@
 # QMetriX
 
-> `@mifort/qmetrix` — build & quality tooling, extracted from `ai.mifort.com`'s `dev/scripts/`.
+> `@mifort-solutions/qmetrix` — build & quality tooling, extracted from `ai.mifort.com`'s `dev/scripts/`.
 
 QMetriX is a set of plain-ESM Node scripts that compute quality signals over a
 **consuming repository**: coverage merge & reporting, a quality dashboard, an image
@@ -29,7 +29,7 @@ reads target the wrong tree.
 ## Install
 
 ```bash
-npm install --save-dev @mifort/qmetrix
+npm install --save-dev @mifort-solutions/qmetrix
 ```
 
 ## Bins
