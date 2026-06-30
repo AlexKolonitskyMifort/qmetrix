@@ -1,0 +1,44 @@
+{
+  "total": {
+    "lines": { "total": 1240, "covered": 1048, "skipped": 0, "pct": 84.51 },
+    "statements": { "total": 1310, "covered": 1087, "skipped": 0, "pct": 82.97 },
+    "functions": { "total": 248, "covered": 198, "skipped": 0, "pct": 79.83 },
+    "branches": { "total": 532, "covered": 392, "skipped": 0, "pct": 73.68 }
+  },
+  "src/quality-dashboard.mjs": {
+    "lines": { "total": 130, "covered": 121, "skipped": 0, "pct": 93.07 },
+    "statements": { "total": 138, "covered": 127, "skipped": 0, "pct": 92.02 },
+    "functions": { "total": 14, "covered": 13, "skipped": 0, "pct": 92.85 },
+    "branches": { "total": 46, "covered": 39, "skipped": 0, "pct": 84.78 }
+  },
+  "src/dashboard/render/template.mjs": {
+    "lines": { "total": 210, "covered": 142, "skipped": 0, "pct": 67.61 },
+    "statements": { "total": 224, "covered": 150, "skipped": 0, "pct": 66.96 },
+    "functions": { "total": 38, "covered": 24, "skipped": 0, "pct": 63.15 },
+    "branches": { "total": 120, "covered": 71, "skipped": 0, "pct": 59.16 }
+  },
+  "src/dashboard/collectors/coverage.mjs": {
+    "lines": { "total": 98, "covered": 96, "skipped": 0, "pct": 97.95 },
+    "statements": { "total": 104, "covered": 101, "skipped": 0, "pct": 97.11 },
+    "functions": { "total": 12, "covered": 12, "skipped": 0, "pct": 100 },
+    "branches": { "total": 40, "covered": 36, "skipped": 0, "pct": 90 }
+  },
+  "src/dashboard/collectors/security.mjs": {
+    "lines": { "total": 182, "covered": 121, "skipped": 0, "pct": 66.48 },
+    "statements": { "total": 190, "covered": 126, "skipped": 0, "pct": 66.31 },
+    "functions": { "total": 16, "covered": 11, "skipped": 0, "pct": 68.75 },
+    "branches": { "total": 88, "covered": 49, "skipped": 0, "pct": 55.68 }
+  },
+  "src/bundle-codebase.mjs": {
+    "lines": { "total": 360, "covered": 281, "skipped": 0, "pct": 78.05 },
+    "statements": { "total": 384, "covered": 296, "skipped": 0, "pct": 77.08 },
+    "functions": { "total": 64, "covered": 49, "skipped": 0, "pct": 76.56 },
+    "branches": { "total": 148, "covered": 102, "skipped": 0, "pct": 68.91 }
+  },
+  "src/security-scan.mjs": {
+    "lines": { "total": 260, "covered": 187, "skipped": 0, "pct": 71.92 },
+    "statements": { "total": 270, "covered": 187, "skipped": 0, "pct": 69.25 },
+    "functions": { "total": 30, "covered": 21, "skipped": 0, "pct": 70 },
+    "branches": { "total": 90, "covered": 55, "skipped": 0, "pct": 61.11 }
+  }
+}

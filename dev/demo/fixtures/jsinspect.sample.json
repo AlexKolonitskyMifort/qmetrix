@@ -1,0 +1,32 @@
+[
+  {
+    "id": "demo-sample-1",
+    "instances": [
+      {
+        "path": "src/dashboard/render/components.mjs",
+        "lines": [44, 72],
+        "code": "// [QMetriX demo — illustrative sample] structurally similar render helper"
+      },
+      {
+        "path": "src/dashboard/render/template.mjs",
+        "lines": [180, 208],
+        "code": "// [QMetriX demo — illustrative sample] structurally similar render helper"
+      }
+    ]
+  },
+  {
+    "id": "demo-sample-2",
+    "instances": [
+      {
+        "path": "src/coverage/report-suite.mjs",
+        "lines": [30, 51],
+        "code": "// [QMetriX demo — illustrative sample] near-duplicate report-writing block"
+      },
+      {
+        "path": "src/coverage/report-global.mjs",
+        "lines": [28, 49],
+        "code": "// [QMetriX demo — illustrative sample] near-duplicate report-writing block"
+      }
+    ]
+  }
+]
