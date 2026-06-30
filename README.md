@@ -70,6 +70,22 @@ qmetrix-optimize-images public/images --format webp
 }
 ```
 
+## Demo
+
+See what QMetriX produces without installing it into a host repo. The demo **dogfoods
+QMetriX against this repository** and serves a self-contained, GitHub-Pages-ready site:
+
+```bash
+npm run demo          # build + serve at http://localhost:8080
+npm run demo:build    # build dist/site/ only (no server)
+```
+
+It runs the showcased bins live (quality dashboard, codebase bundle, structural-duplication
+audit) and fills coverage/security panels from clearly-labelled sample reports, since a
+build-less ESM package has no test suite or security toolchain. The demo lives under
+`dev/demo/` and **never ships in the npm tarball**. Details:
+[dev/demo/README.md](dev/demo/README.md).
+
 ## License
 
 MIT.

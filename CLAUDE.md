@@ -60,6 +60,7 @@ src/
 | Dashboard HTML/CSS/JS output              | `src/dashboard/render/`                                        |
 | A shared exec/fs/format helper            | `src/dashboard/utils/` (or a small co-located helper)          |
 | Docs / process / task artifacts           | `dev/` — **not shipped** (excluded by the `files` allowlist)   |
+| The runnable demo / showcase site         | `dev/demo/` — **not shipped**; `npm run demo` (see §8)         |
 
 - **Only `src/` is published** (`"files": ["src"]` in `package.json`). Anything under `dev/`,
   `.claude/`, tests, or the repo root is repo-local and must not be required at runtime by a bin.
@@ -110,11 +111,14 @@ src/
 npm pack --dry-run     # inspect exactly what would publish (the src/ allowlist)
 npm ls                 # dependency tree
 node src/<bin>.mjs …   # run a bin against the *current* cwd while developing
+npm run demo           # build + serve the dogfood demo site (dev/demo/, not shipped)
+npm run demo:build     # build dist/site/ only (+ self-containment smoke check)
 ```
 
 There is no app to start and no test suite wired in this repo yet; QMetriX is exercised by running
 its bins against a consuming checkout. When verifying a change, run the affected bin from a
-consumer's root and diff its `dist/reports/` output before and after.
+consumer's root and diff its `dist/reports/` output before and after. The quickest end-to-end check
+is `npm run demo`, which dogfoods every showcased bin against this repo (see [dev/demo/README.md](dev/demo/README.md)).
 
 ---
 
