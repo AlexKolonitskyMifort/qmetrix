@@ -154,8 +154,11 @@ This repo carries the same Claude-driven task pipeline as the rest of the mifort
 `dev/processes/` and the global skills are kept in sync: edit the installed copy in
 `~/.claude/skills/<name>/SKILL.md` (that is what Claude Code loads), then mirror it back here
 (`cp ~/.claude/skills/<name>/SKILL.md dev/processes/<name>.md`) so the process stays versioned with
-the repo. This repo holds the **processes**, not a live task board — task folders live in the
-consuming app, not here.
+the repo. The processes here are the **canonical mirror** shared across all mifort projects.
+
+This repo also runs its **own task board** at [dev/tasks/](dev/tasks/): tasks that target QMetriX
+itself — its bins, dashboard, packaging, and this tooling — are tracked here. Work on a *consuming*
+app's product belongs in that app's repo, not here; only QMetriX's own work lives on this board.
 
 ---
 
