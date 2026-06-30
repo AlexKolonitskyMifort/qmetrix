@@ -23,7 +23,7 @@
   ],
   "scripts": {
     "demo": "node dev/demo/run.mjs",
-    "demo:build": "node dev/demo/run.mjs --no-serve"
+    "demo:build": "node dev/demo/run.mjs --no-serve && node dev/demo/check.mjs"
   },
   "bin": {
     "qmetrix-audit-structure": "src/audit-structure.mjs",
