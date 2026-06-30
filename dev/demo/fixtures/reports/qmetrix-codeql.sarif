@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "version": "2.1.0",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "CodeQL",
+          "informationUri": "https://codeql.github.com",
+          "rules": [
+            {
+              "id": "js/incomplete-sanitization",
+              "name": "IncompleteSanitization",
+              "shortDescription": { "text": "Incomplete string escaping or encoding" },
+              "defaultConfiguration": { "level": "warning" },
+              "properties": { "security-severity": "5.3" }
+            },
+            {
+              "id": "js/regex-injection",
+              "name": "RegExpInjection",
+              "shortDescription": { "text": "Regular expression built from user input" },
+              "defaultConfiguration": { "level": "error" },
+              "properties": { "security-severity": "7.5" }
+            },
+            {
+              "id": "js/unused-local-variable",
+              "name": "UnusedVariable",
+              "shortDescription": { "text": "Unused variable, import, function or class" },
+              "defaultConfiguration": { "level": "note" }
+            }
+          ]
+        }
+      },
+      "results": [
+        {
+          "ruleId": "js/regex-injection",
+          "level": "error",
+          "message": { "text": "[QMetriX demo — illustrative sample] This regular expression is constructed from a value that may not be fully sanitized." },
+          "properties": { "security-severity": "7.5" },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": { "uri": "src/dashboard/collectors/graph.mjs" },
+                "region": { "startLine": 88, "startColumn": 5 }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "js/incomplete-sanitization",
+          "level": "warning",
+          "message": { "text": "[QMetriX demo — illustrative sample] This replacement may leave some occurrences of the dangerous character." },
+          "properties": { "security-severity": "5.3" },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": { "uri": "src/dashboard/render/template.mjs" },
+                "region": { "startLine": 56, "startColumn": 9 }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "js/unused-local-variable",
+          "level": "note",
+          "message": { "text": "[QMetriX demo — illustrative sample] Variable 'tmp' is assigned but never used." },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": { "uri": "src/bundle-codebase.mjs" },
+                "region": { "startLine": 212, "startColumn": 11 }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

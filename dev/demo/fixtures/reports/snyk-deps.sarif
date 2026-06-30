@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "version": "2.1.0",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "Snyk Open Source",
+          "informationUri": "https://snyk.io",
+          "rules": [
+            {
+              "id": "SNYK-JS-SAMPLE-PROTOTYPE-1",
+              "name": "Prototype Pollution",
+              "shortDescription": { "text": "Prototype Pollution in a transitive dependency" },
+              "defaultConfiguration": { "level": "error" },
+              "properties": { "security-severity": "7.3" }
+            },
+            {
+              "id": "SNYK-JS-SAMPLE-REDOS-2",
+              "name": "Regular Expression Denial of Service (ReDoS)",
+              "shortDescription": { "text": "ReDoS via an inefficient regular expression" },
+              "defaultConfiguration": { "level": "warning" },
+              "properties": { "security-severity": "5.5" }
+            }
+          ]
+        }
+      },
+      "results": [
+        {
+          "ruleId": "SNYK-JS-SAMPLE-PROTOTYPE-1",
+          "level": "error",
+          "message": { "text": "[QMetriX demo — illustrative sample] Prototype Pollution introduced via a transitive dependency." },
+          "properties": { "security-severity": "7.3" },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": { "uri": "package.json" },
+                "region": { "startLine": 41 }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "SNYK-JS-SAMPLE-REDOS-2",
+          "level": "warning",
+          "message": { "text": "[QMetriX demo — illustrative sample] ReDoS reachable through an inefficient regular expression in a dependency." },
+          "properties": { "security-severity": "5.5" },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": { "uri": "package.json" },
+                "region": { "startLine": 42 }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

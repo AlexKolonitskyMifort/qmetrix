@@ -1,0 +1,25 @@
+{
+  "auditReportVersion": 2,
+  "vulnerabilities": {
+    "sharp": {
+      "name": "sharp",
+      "severity": "moderate",
+      "isDirect": true,
+      "via": [
+        {
+          "title": "[QMetriX demo — illustrative sample] Inefficient processing of crafted input",
+          "severity": "moderate",
+          "range": ">=0.32.0 <0.35.1"
+        }
+      ],
+      "effects": [],
+      "range": "0.32.0 - 0.35.0",
+      "nodes": ["node_modules/sharp"],
+      "fixAvailable": true
+    }
+  },
+  "metadata": {
+    "vulnerabilities": { "info": 0, "low": 1, "moderate": 1, "high": 0, "critical": 0, "total": 2 },
+    "dependencies": { "prod": 3, "dev": 0, "optional": 0, "peer": 0, "peerOptional": 0, "total": 3 }
+  }
+}

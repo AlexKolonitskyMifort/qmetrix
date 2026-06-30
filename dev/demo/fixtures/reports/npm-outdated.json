@@ -1,0 +1,9 @@
+{
+  "monocart-coverage-reports": {
+    "current": "2.12.12",
+    "wanted": "2.12.12",
+    "latest": "2.13.1",
+    "dependent": "@mifort-solutions/qmetrix",
+    "location": "node_modules/monocart-coverage-reports"
+  }
+}
