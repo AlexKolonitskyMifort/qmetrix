@@ -40,7 +40,9 @@ const argv = process.argv.slice(2);
 const flag = (name) => argv.includes(name);
 const opt = (name, fallback) => {
   const i = argv.indexOf(name);
-  return i >= 0 && argv[i + 1] ? argv[i + 1] : fallback;
+  const v = i >= 0 ? argv[i + 1] : undefined;
+  // A following `--flag` is not this option's value (e.g. `--port --open`).
+  return v && !v.startsWith('--') ? v : fallback;
 };
 
 const FIXTURES = path.join(ROOT, 'dev', 'demo', 'fixtures', 'reports');
@@ -99,9 +101,14 @@ async function main() {
     process.exit(1);
   }
 
-  // 1. Clean — a fresh dist/site/ every run (idempotent; no stale artifacts survive).
-  log('Cleaning dist/site/ …');
+  // 1. Clean — a fresh dist/site/ AND dist/reports/ every run so nothing stale survives:
+  //    not a prior demo's output, not a developer's unrelated reports (a real *.sarif,
+  //    eslint.json, an extra coverage suite) that would otherwise leak into the dashboard
+  //    and mix with the seeded samples. The demo re-seeds dist/reports/ from fixtures next,
+  //    so the report inventory is deterministic every run (idempotent; FR-8 / AC-8).
+  log('Cleaning dist/site/ and dist/reports/ …');
   rmSync(SITE, { recursive: true, force: true });
+  rmSync(REPORTS, { recursive: true, force: true });
 
   // 2. Seed illustrative sample reports so coverage / security / deps panels populate.
   log('Seeding illustrative sample reports into dist/reports/ …');
@@ -156,7 +163,7 @@ async function main() {
     return;
   }
 
-  const port = Number(opt('--port', process.env.QMETRIX_DEMO_PORT || 8080));
+  const port = Number(opt('--port', process.env.QMETRIX_DEMO_PORT || 8080)) || 8080;
   const host = opt('--host', '127.0.0.1');
   const { url } = await startServer({ root: SITE, port, host });
   console.log(`\n\x1b[32m●\x1b[0m QMetriX demo serving at \x1b[1m${url}\x1b[0m  (Ctrl-C to stop)\n`);
