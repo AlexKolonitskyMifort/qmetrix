@@ -21,6 +21,10 @@
     "code-quality",
     "ci"
   ],
+  "scripts": {
+    "demo": "node dev/demo/run.mjs",
+    "demo:build": "node dev/demo/run.mjs --no-serve"
+  },
   "bin": {
     "qmetrix-audit-structure": "src/audit-structure.mjs",
     "qmetrix-bundle-codebase": "src/bundle-codebase.mjs",
