@@ -120,10 +120,12 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
   const argv = process.argv.slice(2);
   const opt = (name, fallback) => {
     const i = argv.indexOf(name);
-    return i >= 0 && argv[i + 1] ? argv[i + 1] : fallback;
+    const v = i >= 0 ? argv[i + 1] : undefined;
+    // A following `--flag` is not this option's value (e.g. `--port --host x`).
+    return v && !v.startsWith('--') ? v : fallback;
   };
   const dir = argv.find((a) => !a.startsWith('--')) || '.';
-  const port = Number(opt('--port', process.env.QMETRIX_DEMO_PORT || 8080));
+  const port = Number(opt('--port', process.env.QMETRIX_DEMO_PORT || 8080)) || 8080;
   const host = opt('--host', '127.0.0.1');
   const { url } = await startServer({ root: dir, port, host });
   console.log(`Serving ${path.resolve(dir)}\n→ ${url}  (Ctrl-C to stop)`);

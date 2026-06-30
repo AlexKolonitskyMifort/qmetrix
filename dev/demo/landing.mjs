@@ -21,6 +21,12 @@ const esc = (s) =>
 const num = (n) => (typeof n === 'number' && isFinite(n) ? n.toLocaleString('en-US') : '—');
 const pct = (n) => (typeof n === 'number' && isFinite(n) ? `${n.toFixed(1)}%` : '—');
 
+/** Join a list into prose: "a", "a and b", "a, b and c". Inputs are trusted static strings. */
+const humanList = (arr) =>
+  arr.length <= 1
+    ? arr.join('')
+    : `${arr.slice(0, -1).join(', ')} and ${arr[arr.length - 1]}`;
+
 /** Total finding count across all security tools present in the dashboard data. */
 function securityCount(security) {
   if (!security) {
@@ -40,13 +46,19 @@ function tile(label, value, sub) {
   }</div>`;
 }
 
+/** Provenance badge. `live`: true → live, false → sample, 'mixed' → both (e.g. the dashboard). */
+function badge(live) {
+  if (live === 'mixed') {
+    return '<span class="badge mixed">live + sample</span>';
+  }
+  return `<span class="badge ${live ? 'live' : 'sample'}">${live ? 'live' : 'sample data'}</span>`;
+}
+
 function card({ href, icon, title, desc, live }) {
   return `<a class="card" href="${esc(href)}">
     <div class="ci">${icon}</div>
     <div class="cc">
-      <div class="ct">${esc(title)} <span class="badge ${live ? 'live' : 'sample'}">${
-        live ? 'live' : 'sample data'
-      }</span></div>
+      <div class="ct">${esc(title)} ${badge(live)}</div>
       <div class="cd">${esc(desc)}</div>
     </div>
     <div class="ca">→</div>
@@ -72,6 +84,21 @@ export function renderLanding(data = {}) {
   const sec = securityCount(data.security);
   const repoUrl = meta.repo ? `https://github.com/${meta.repo.owner}/${meta.repo.name}` : null;
 
+  // Honest provenance split for the disclaimer. Coverage, security and the dependency
+  // audit/outdated columns are always seeded samples; structural duplication is live only
+  // for a .js/.ts consumer (here, a .mjs repo, it falls back to a sample — see run.mjs).
+  const dupLive = !!data.duplicationLive;
+  const sampleSignals = ['Coverage', 'Security (Snyk / CodeQL)', 'dependency audit / outdated'];
+  const realSignals = [
+    'the code overview and languages',
+    'the dependency inventory (names, versions, usage)',
+    'the file graph',
+    'the codebase bundle',
+  ];
+  (dupLive ? realSignals : sampleSignals).push(
+    dupLive ? 'the structural-duplication audit' : 'structural duplication',
+  );
+
   const strip = [
     tile('Lines of code', kloc ? `${kloc}K` : '—', `${num(code.codeFiles)} source files`),
     tile('Files scanned', num(code.totalFiles), 'across the repo'),
@@ -91,7 +118,7 @@ export function renderLanding(data = {}) {
       icon: '📊',
       title: 'Quality dashboard',
       desc: 'Code overview, coverage, dependencies, security, file graph and more — one self-contained page.',
-      live: false,
+      live: 'mixed',
     }),
     card({
       href: 'codebase-bundle.html',
@@ -114,7 +141,7 @@ export function renderLanding(data = {}) {
       icon: '🗂️',
       title: 'Raw dashboard data',
       desc: 'The full collected dataset behind the dashboard, as JSON — for programmatic use.',
-      live: false,
+      live: 'mixed',
     }),
   ].join('');
 
@@ -164,6 +191,7 @@ export function renderLanding(data = {}) {
   .badge { font-size: 10.5px; font-weight: 600; padding: 2px 7px; border-radius: 999px; vertical-align: middle; margin-left: 6px; text-transform: uppercase; letter-spacing: 0.3px; }
   .badge.live { background: #12331f; color: #3fb950; border: 1px solid #238636; }
   .badge.sample { background: #2d2200; color: #e3b341; border: 1px solid #9e6a03; }
+  .badge.mixed { background: #11202e; color: #58a6ff; border: 1px solid #1f6feb; }
   footer { color: #6e7681; font-size: 12.5px; margin-top: 40px; border-top: 1px solid #21262d; padding-top: 16px; }
 </style>
 </head>
@@ -182,11 +210,11 @@ export function renderLanding(data = {}) {
   </header>
 
   <div class="disclaimer">
-    <strong>⚠ Demo data notice.</strong> The <strong>Coverage</strong> and <strong>Security</strong>
-    panels are populated from <em>illustrative sample reports</em> committed under
+    <strong>⚠ Demo data notice.</strong> The ${humanList(sampleSignals)} ${
+      sampleSignals.length > 1 ? 'panels are' : 'panel is'
+    } populated from <em>illustrative sample reports</em> committed under
     <code>dev/demo/fixtures/</code> — they are <em>not</em> QMetriX's real metrics (a build-less ESM
-    package has no test suite or security toolchain). Everything else — code overview, dependency
-    inventory, file graph, the codebase bundle and the structural-duplication audit — is
+    package has no test suite or security toolchain). Everything else — ${humanList(realSignals)} — is
     <strong>real</strong>, generated live from this repository.
   </div>
 
