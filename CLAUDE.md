@@ -32,7 +32,7 @@ the contract: a bin invoked from a subdirectory must be a usage error, not a sil
 
 - When you add or edit a script, resolve consumer paths against `process.cwd()`. Use
   `import.meta.url` **only** to load assets shipped *inside this package* (templates, fixtures).
-- Never hardcode `ai.mifort.com` (or any single consumer's) paths, layout, or assumptions. A path
+- Never hardcode any single consumer's paths, layout, or assumptions. A path
   that exists in one host but not another is configuration, not a constant — surface it, default it.
 
 ## 3. Module layout — where things go
@@ -113,8 +113,8 @@ node src/<bin>.mjs …   # run a bin against the *current* cwd while developing
 ```
 
 There is no app to start and no test suite wired in this repo yet; QMetriX is exercised by running
-its bins against a consuming checkout (e.g. `ai.mifort.com`). When verifying a change, run the
-affected bin from a consumer's root and diff its `dist/reports/` output before and after.
+its bins against a consuming checkout. When verifying a change, run the affected bin from a
+consumer's root and diff its `dist/reports/` output before and after.
 
 ---
 
@@ -139,9 +139,8 @@ How to *navigate* the code, not just where to put it. These bind exploration, no
 
 ## 10. Task pipeline & PM processes
 
-This repo carries the same Claude-driven task pipeline as the rest of the mifort projects, defined in
-[dev/processes/](dev/processes/) — the canonical mirror of the installed skills at
-`~/.claude/skills/<name>/SKILL.md`:
+This repo runs a Claude-driven task pipeline defined in [dev/processes/](dev/processes/) — the
+versioned copy of the installed skills at `~/.claude/skills/<name>/SKILL.md`:
 
 - **Pipeline** (per task): `/task-add` → `/task-requirement` → `/task-design` → `/task-planning` →
   `/task-implementation` → `/task-code-review`. Artifacts live in `dev/tasks/<slug>/` as
@@ -151,14 +150,13 @@ This repo carries the same Claude-driven task pipeline as the rest of the mifort
 - **PM layer**: [/pm-status](dev/processes/pm-status.md) reports the board; see
   [dev/processes/pm-suite.md](dev/processes/pm-suite.md) for shared conventions.
 
-`dev/processes/` and the global skills are kept in sync: edit the installed copy in
+`dev/processes/` and the installed skills are kept in sync: edit the installed copy in
 `~/.claude/skills/<name>/SKILL.md` (that is what Claude Code loads), then mirror it back here
 (`cp ~/.claude/skills/<name>/SKILL.md dev/processes/<name>.md`) so the process stays versioned with
-the repo. The processes here are the **canonical mirror** shared across all mifort projects.
+the repo.
 
-This repo also runs its **own task board** at [dev/tasks/](dev/tasks/): tasks that target QMetriX
-itself — its bins, dashboard, packaging, and this tooling — are tracked here. Work on a *consuming*
-app's product belongs in that app's repo, not here; only QMetriX's own work lives on this board.
+The **task board** lives under [dev/tasks/](dev/tasks/) — this repo's tasks are tracked there as
+`dev/tasks/<slug>/`, and nowhere else.
 
 ---
 
